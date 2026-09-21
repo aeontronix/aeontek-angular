@@ -3,7 +3,7 @@
  */
 
 import { Component, inject, signal } from '@angular/core';
-import { ReloadService, reloadableResource } from 'lib';
+import { ReloadService, reloadableResource } from '@aeontronix/aeontek-angular';
 import { DemoApi, DemoStats, DemoUser } from './demo-api';
 
 @Component({

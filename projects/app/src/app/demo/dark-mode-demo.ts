@@ -3,7 +3,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DarkModeButton, DarkModeService } from 'lib';
+import { DarkModeButton, DarkModeService } from '@aeontronix/aeontek-angular';
 
 /**
  * Demo of the `DarkModeService` and the `DarkModeButton`: the tailwind `dark:` variants follow the

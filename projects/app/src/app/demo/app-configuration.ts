@@ -2,7 +2,7 @@
  * Copyright (c) 2025. Aeontronix Inc
  */
 
-import { AeontekConfiguration } from 'lib';
+import { AeontekConfiguration } from '@aeontronix/aeontek-angular';
 
 /**
  * Application configuration downloaded from `/config.json`, extending the base configuration (`apiUrl`)

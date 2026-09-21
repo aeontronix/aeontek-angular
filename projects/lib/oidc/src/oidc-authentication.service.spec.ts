@@ -5,7 +5,7 @@
 import {signal, WritableSignal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {AuthenticatedResult, OidcSecurityService} from 'angular-auth-oidc-client';
-import {AuthenticationService} from 'lib';
+import {AuthenticationService} from '@aeontronix/aeontek-angular';
 import {OidcAuthenticationService, provideAuthOidcAuthentication} from './oidc-authentication.service';
 
 describe('OidcAuthenticationService', () => {

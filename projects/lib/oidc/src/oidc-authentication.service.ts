@@ -4,7 +4,7 @@
 
 import {computed, EnvironmentProviders, inject, Injectable, makeEnvironmentProviders, Signal} from '@angular/core';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
-import {AUTHENTICATION_BACKEND, AuthenticationService} from 'lib';
+import {AUTHENTICATION_BACKEND, AuthenticationService} from '@aeontronix/aeontek-angular';
 
 /**
  * {@link AuthenticationService} implementation backed by

@@ -12,8 +12,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `AuthenticationService`: abstraction over the authentication library used by the application, exposing an
   `isAuthenticated` signal, resolved from the `AUTHENTICATION_BACKEND` token and falling back to
   `NoopAuthenticationService` (never authenticated) when no library is integrated.
-- `lib/oidc` secondary entry point: `OidcAuthenticationService` and `provideAuthOidcAuthentication()`, backing
-  the `AuthenticationService` with [angular-auth-oidc-client](https://github.com/damienbod/angular-auth-oidc-client),
+- `@aeontronix/aeontek-angular/oidc` secondary entry point: `OidcAuthenticationService` and
+  `provideAuthOidcAuthentication()`, backing the `AuthenticationService` with [angular-auth-oidc-client](https://github.com/damienbod/angular-auth-oidc-client),
   which is declared as an *optional* peer dependency so applications which do not use it never need it installed.
 - `provideAeontek()` with `AeontekConfig` to set up the library in an application.
 - `ConfigurationService`: loading and exposing the runtime configuration of the application.

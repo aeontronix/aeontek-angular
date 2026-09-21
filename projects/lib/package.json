@@ -1,5 +1,5 @@
 {
-  "name": "lib",
+  "name": "@aeontronix/aeontek-angular",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^22.1.0",

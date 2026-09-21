@@ -3,7 +3,7 @@
  */
 
 import { Component, signal } from '@angular/core';
-import { injectConfiguration } from 'lib';
+import { injectConfiguration } from '@aeontronix/aeontek-angular';
 import { AppConfiguration } from './app-configuration';
 
 @Component({

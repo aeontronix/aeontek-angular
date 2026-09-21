@@ -1,7 +1,7 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideAeontek, restApiInterceptor } from 'lib';
+import { provideAeontek, restApiInterceptor } from '@aeontronix/aeontek-angular';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {

@@ -9,7 +9,7 @@ import {inject, Injectable, InjectionToken, Signal, signal} from '@angular/core'
  * {@link AuthenticationService} delegates to when present.
  *
  * It is not meant to be provided directly, the integration of a given authentication library provides it
- * (ie `provideAuthOidcAuthentication()` of the `lib/oidc` entry point).
+ * (ie `provideAuthOidcAuthentication()` of the `@aeontronix/aeontek-angular/oidc` entry point).
  */
 export const AUTHENTICATION_BACKEND = new InjectionToken<AuthenticationService>('aeontek.authentication-backend');
 
@@ -34,10 +34,10 @@ export const AUTHENTICATION_BACKEND = new InjectionToken<AuthenticationService>(
  * integrated, so that this service can always be injected.
  *
  * Applications using [angular-auth-oidc-client](https://github.com/damienbod/angular-auth-oidc-client)
- * register the matching implementation with the `lib/oidc` entry point:
+ * register the matching implementation with the `@aeontronix/aeontek-angular/oidc` entry point:
  *
  * ```ts
- * import {provideAuthOidcAuthentication} from 'lib/oidc';
+ * import {provideAuthOidcAuthentication} from '@aeontronix/aeontek-angular/oidc';
  *
  * export const appConfig: ApplicationConfig = {
  *     providers: [

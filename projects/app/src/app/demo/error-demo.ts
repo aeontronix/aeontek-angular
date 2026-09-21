@@ -4,7 +4,7 @@
 
 import { Component, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorView, reloadableResource } from 'lib';
+import { ErrorView, reloadableResource } from '@aeontronix/aeontek-angular';
 
 type FailureKind = 'http' | 'plain' | 'none';
 

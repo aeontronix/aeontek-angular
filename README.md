@@ -138,7 +138,7 @@ Applications using [angular-auth-oidc-client](https://github.com/damienbod/angul
 `provideAuthOidcAuthentication()`, which backs the service with the `OidcSecurityService` of that library:
 
 ```ts
-import { provideAuthOidcAuthentication } from 'lib/oidc';
+import { provideAuthOidcAuthentication } from '@aeontronix/aeontek-angular/oidc';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -149,9 +149,10 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-That integration lives in its own `lib/oidc` entry point, which is the only place where
-`angular-auth-oidc-client` is referenced (it is an optional peer dependency): applications which do not
-use it never import that entry point, and therefore do not need the library installed at all.
+That integration lives in its own `@aeontronix/aeontek-angular/oidc` entry point, which is the only
+place where `angular-auth-oidc-client` is referenced (it is an optional peer dependency): applications
+which do not use it never import that entry point, and therefore do not need the library installed at
+all.
 
 With several openid configurations the user is considered authenticated once all of them are, which is
 what `OidcSecurityService` itself reports. `provideAuth()` remains responsible for the configuration and

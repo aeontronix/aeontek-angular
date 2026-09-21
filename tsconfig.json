@@ -7,8 +7,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "lib": ["./dist/lib"],
-      "lib/oidc": ["./dist/lib/oidc"]
+      "@aeontronix/aeontek-angular": ["./dist/lib"],
+      "@aeontronix/aeontek-angular/oidc": ["./dist/lib/oidc"]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
