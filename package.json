@@ -5,8 +5,10 @@
     "ng": "ng",
     "start": "ng serve app",
     "build": "ng build lib && ng build app",
+    "build:lib": "ng build lib",
     "watch": "ng build lib --watch --configuration development",
-    "test": "ng test lib && ng test app"
+    "test": "ng test lib && ng test app",
+    "test:lib": "ng test lib --watch=false"
   },
   "private": true,
   "packageManager": "npm@11.19.0",
