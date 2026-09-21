@@ -1,0 +1,60 @@
+<section class="mx-auto flex max-w-4xl flex-col gap-6 p-6">
+  <header class="flex flex-col gap-2">
+    <h1 class="text-2xl font-semibold text-fg">ErrorView demo</h1>
+    <p class="text-sm text-fg-muted">
+      The error of a resource is converted by the ErrorHandlingService and displayed by the
+      ErrorView, which only shows its title, the details being available on demand. The refresh
+      button triggers a full reload through the ReloadService.
+    </p>
+  </header>
+
+  <div class="flex flex-wrap gap-2">
+    <button
+      type="button"
+      class="rounded-full border border-accent-border bg-accent-surface px-3 py-1.5 text-sm font-medium text-accent-fg hover:bg-accent-surface-hover"
+      (click)="fail('http')"
+    >
+      fail with an http error
+    </button>
+    <button
+      type="button"
+      class="rounded-full border border-accent-border bg-accent-surface px-3 py-1.5 text-sm font-medium text-accent-fg hover:bg-accent-surface-hover"
+      (click)="fail('plain')"
+    >
+      fail with a plain error
+    </button>
+    <button
+      type="button"
+      class="rounded-full border border-border bg-inverse px-3 py-1.5 text-sm font-medium text-inverse-fg hover:bg-inverse-hover"
+      (click)="fail('none')"
+    >
+      succeed
+    </button>
+  </div>
+
+  <article class="rounded-lg border border-border p-4">
+    <h2 class="mb-3 font-medium text-fg">demo.errors</h2>
+    @if (users.error(); as error) {
+      <lib-error-view [error]="error" />
+    } @else if (users.isLoading()) {
+      <p class="text-sm text-fg-subtle">Loading…</p>
+    } @else {
+      <ul class="flex flex-col gap-1 text-sm text-fg">
+        @for (user of users.value(); track user) {
+          <li>{{ user }}</li>
+        }
+      </ul>
+    }
+  </article>
+
+  <article class="rounded-lg border border-border p-4">
+    <h2 class="mb-3 font-medium text-fg">short error, inline</h2>
+    <p class="mb-3 text-sm text-fg-muted">
+      The ErrorView takes the width of its container, so wrapping it in a narrow element keeps a short
+      error compact instead of spanning the whole page.
+    </p>
+    <div class="inline-flex max-w-xs">
+      <lib-error-view [error]="shortError" [refreshable]="false" />
+    </div>
+  </article>
+</section>

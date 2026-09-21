@@ -1,0 +1,162 @@
+<section class="mx-auto flex max-w-4xl flex-col gap-6 p-6">
+  <header class="flex flex-col gap-2">
+    <h1 class="text-2xl font-semibold text-fg">ReloadService demo</h1>
+    <p class="text-sm text-fg-muted">
+      Resources are registered with hierarchical ids. Reloading a parent id also reloads all its
+      children.
+    </p>
+    <div class="flex items-center gap-2 text-sm">
+      <span
+        class="inline-block h-2.5 w-2.5 rounded-full"
+        [class.bg-accent]="reloadService.reloading()"
+        [class.animate-pulse]="reloadService.reloading()"
+        [class.bg-fg-subtle]="!reloadService.reloading()"
+      ></span>
+      <span class="font-medium text-fg">
+        {{ reloadService.reloading() ? 'Reloading…' : 'Idle' }}
+      </span>
+      <span class="text-fg-muted">
+        reloadingIds(): [{{ reloadService.reloadingIds().join(', ') }}]
+      </span>
+    </div>
+  </header>
+
+  <div class="flex flex-wrap gap-2">
+    @for (id of ['data', 'data.users', 'data.stats', 'reports', 'notifications']; track id) {
+      <button
+        type="button"
+        class="rounded-full border border-accent-border bg-accent-surface px-3 py-1.5 text-sm font-medium text-accent-fg hover:bg-accent-surface-hover"
+        (click)="reload(id)"
+      >
+        reload('{{ id }}')
+      </button>
+    }
+    <button
+      type="button"
+      class="rounded-full border border-border bg-inverse px-3 py-1.5 text-sm font-medium text-inverse-fg hover:bg-inverse-hover"
+      (click)="reload()"
+    >
+      reload() — everything
+    </button>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <article class="rounded-lg border border-border p-4">
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="font-medium text-fg">
+          data.users
+          @if (reloadService.isReloading('data.users')) {
+            <span class="ml-2 text-xs font-normal text-accent">reloading…</span>
+          }
+        </h2>
+        <div class="flex gap-2">
+          <button type="button" class="text-sm text-accent-fg hover:underline" (click)="nextPage()">
+            page {{ page() }} →
+          </button>
+          <button
+            type="button"
+            class="text-sm text-accent-fg hover:underline"
+            (click)="reload('data.users')"
+          >
+            reload
+          </button>
+        </div>
+      </div>
+      <ul class="flex flex-col gap-1 text-sm text-fg">
+        @for (user of users.value(); track user.id) {
+          <li>
+            {{ user.name }} — <span class="text-fg-muted">{{ user.role }}</span>
+          </li>
+        } @empty {
+          <li class="text-fg-subtle">No users</li>
+        }
+      </ul>
+    </article>
+
+    <article class="rounded-lg border border-border p-4">
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="font-medium text-fg">
+          data.stats
+          @if (reloadService.isReloading('data.stats')) {
+            <span class="ml-2 text-xs font-normal text-accent">reloading…</span>
+          }
+        </h2>
+        <button
+          type="button"
+          class="text-sm text-accent-fg hover:underline"
+          (click)="reload('data.stats')"
+        >
+          reload
+        </button>
+      </div>
+      @if (stats.value(); as value) {
+        <dl class="grid grid-cols-3 gap-2 text-sm text-fg">
+          <div>
+            <dt class="text-fg-muted">users</dt>
+            <dd>{{ value.users }}</dd>
+          </div>
+          <div>
+            <dt class="text-fg-muted">sessions</dt>
+            <dd>{{ value.sessions }}</dd>
+          </div>
+          <div>
+            <dt class="text-fg-muted">errors</dt>
+            <dd>{{ value.errors }}</dd>
+          </div>
+        </dl>
+      } @else {
+        <p class="text-sm text-fg-subtle">No stats yet</p>
+      }
+    </article>
+
+    <article class="rounded-lg border border-border p-4">
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="font-medium text-fg">
+          reports.activity
+          @if (reloadService.isReloading('reports')) {
+            <span class="ml-2 text-xs font-normal text-accent">reloading…</span>
+          }
+        </h2>
+        <button
+          type="button"
+          class="text-sm text-accent-fg hover:underline"
+          (click)="reload('reports.activity')"
+        >
+          reload
+        </button>
+      </div>
+      <ul class="flex flex-col gap-1 text-sm text-fg">
+        @for (event of activity.value(); track $index) {
+          <li>{{ event }}</li>
+        } @empty {
+          <li class="text-fg-subtle">No activity</li>
+        }
+      </ul>
+    </article>
+
+    <article class="rounded-lg border border-border p-4">
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="font-medium text-fg">
+          notifications <span class="text-xs font-normal text-fg-muted">(callback)</span>
+          @if (reloadService.isReloading('notifications')) {
+            <span class="ml-2 text-xs font-normal text-accent">reloading…</span>
+          }
+        </h2>
+        <button
+          type="button"
+          class="text-sm text-accent-fg hover:underline"
+          (click)="reload('notifications')"
+        >
+          reload
+        </button>
+      </div>
+      <p class="text-sm text-fg">
+        {{ notifications() === null ? 'Loading…' : notifications() + ' unread' }}
+      </p>
+    </article>
+  </div>
+
+  <footer class="text-xs text-fg-muted">
+    Registered ids: {{ reloadService.registeredIds().join(', ') }}
+  </footer>
+</section>

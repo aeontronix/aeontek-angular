@@ -1,0 +1,55 @@
+<section class="mx-auto flex max-w-4xl flex-col gap-6 p-6">
+  <header class="flex flex-col gap-2">
+    <h1 class="text-2xl font-semibold text-fg">ConfigurationService demo</h1>
+    <p class="text-sm text-fg-muted">
+      The configuration is downloaded from
+      <code class="rounded bg-surface-muted px-1">{{ configuration.url }}</code> before the
+      application starts, and typed with the application specific
+      <code class="rounded bg-surface-muted px-1">AppConfiguration</code> interface, which extends
+      the base one (<code class="rounded bg-surface-muted px-1">apiUrl</code>).
+    </p>
+    <div class="flex items-center gap-2 text-sm">
+      <span
+        class="inline-block h-2.5 w-2.5 rounded-full"
+        [class.bg-positive]="configuration.loaded()"
+        [class.bg-fg-subtle]="!configuration.loaded()"
+      ></span>
+      <span class="font-medium text-fg">
+        {{ configuration.loaded() ? 'Loaded' : 'Not loaded' }}
+      </span>
+      <button
+        type="button"
+        class="rounded-full border border-accent-border bg-accent-surface px-3 py-1.5 text-sm font-medium text-accent-fg hover:bg-accent-surface-hover"
+        [disabled]="reloading()"
+        (click)="reload()"
+      >
+        {{ reloading() ? 'loading…' : 'load(true)' }}
+      </button>
+    </div>
+  </header>
+
+  <article class="rounded-lg border border-border p-4">
+    @if (configuration.configuration(); as config) {
+      <dl class="grid gap-2 text-sm text-fg md:grid-cols-2">
+        <div>
+          <dt class="text-fg-muted">apiUrl</dt>
+          <dd>{{ config.apiUrl }}</dd>
+        </div>
+        <div>
+          <dt class="text-fg-muted">appName</dt>
+          <dd>{{ config.appName }}</dd>
+        </div>
+        <div>
+          <dt class="text-fg-muted">environment</dt>
+          <dd>{{ config.environment }}</dd>
+        </div>
+        <div>
+          <dt class="text-fg-muted">features</dt>
+          <dd>{{ config.features.join(', ') }}</dd>
+        </div>
+      </dl>
+    } @else {
+      <p class="text-sm text-fg-subtle">No configuration loaded</p>
+    }
+  </article>
+</section>

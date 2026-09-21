@@ -1,0 +1,6 @@
+{
+  "apiUrl": "https://api.demo.aeontronix.com",
+  "appName": "Aeontek demo",
+  "environment": "development",
+  "features": ["reload", "configuration"]
+}

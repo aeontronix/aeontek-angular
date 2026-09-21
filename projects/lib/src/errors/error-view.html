@@ -1,0 +1,51 @@
+@if (resolved(); as error) {
+    <div class="error-view" role="alert">
+        <div class="error-view-summary">
+            <span class="error-view-icon" aria-hidden="true">!</span>
+            <span class="error-view-title" [title]="error.title">{{ error.title }}</span>
+            @if (details()) {
+                <button
+                    type="button"
+                    class="error-view-action error-view-details-toggle"
+                    [title]="detailsVisible() ? 'Hide details' : 'Show details'"
+                    [attr.aria-label]="detailsVisible() ? 'Hide details' : 'Show details'"
+                    [attr.aria-expanded]="detailsVisible()"
+                    (click)="toggleDetails()"
+                >
+                    <svg class="error-view-action-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        @if (detailsVisible()) {
+                            <path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.4 5.2A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a11 11 0 0 1-2.4 3.5M6.5 6.9C4.3 8.3 3 10.4 3 12c0 2.5 4 7 9 7a9.7 9.7 0 0 0 3.6-.7"/>
+                        } @else {
+                            <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7z"/>
+                            <circle cx="12" cy="12" r="2.5"/>
+                        }
+                    </svg>
+                </button>
+            }
+            @if (refreshable()) {
+                <button
+                    type="button"
+                    class="error-view-action error-view-refresh"
+                    title="Reload everything"
+                    aria-label="Reload everything"
+                    [disabled]="reloading()"
+                    (click)="refresh()"
+                >
+                    <svg
+                        class="error-view-action-icon"
+                        [class.error-view-action-icon-spinning]="reloading()"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+                        <path d="M20 12a8 8 0 1 1-2.3-5.6"/>
+                        <path d="M20 4v5h-5"/>
+                    </svg>
+                </button>
+            }
+        </div>
+        @if (detailsVisible() && details(); as details) {
+            <pre class="error-view-details">{{ details }}</pre>
+        }
+    </div>
+}

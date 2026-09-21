@@ -1,0 +1,121 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+
+/* class based dark mode, driven by the DarkModeService which toggles 'dark' on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Semantic color tokens: the theme exposes them as regular tailwind colors (bg-surface, text-fg,
+ * border-border, …) pointing at css variables, which are then redefined for the dark scheme. Templates
+ * therefore only use the semantic name, and never need a dark: variant for colors.
+ */
+@theme inline {
+  --color-canvas: var(--app-canvas);
+  --color-surface: var(--app-surface);
+  --color-surface-muted: var(--app-surface-muted);
+  --color-fg: var(--app-fg);
+  --color-fg-muted: var(--app-fg-muted);
+  --color-fg-subtle: var(--app-fg-subtle);
+  --color-border: var(--app-border);
+  --color-accent: var(--app-accent);
+  --color-accent-fg: var(--app-accent-fg);
+  --color-accent-surface: var(--app-accent-surface);
+  --color-accent-border: var(--app-accent-border);
+  --color-accent-surface-hover: var(--app-accent-surface-hover);
+  --color-inverse: var(--app-inverse);
+  --color-inverse-fg: var(--app-inverse-fg);
+  --color-inverse-hover: var(--app-inverse-hover);
+  --color-danger: var(--app-danger);
+  --color-danger-fg: var(--app-danger-fg);
+  --color-danger-surface: var(--app-danger-surface);
+  --color-danger-surface-hover: var(--app-danger-surface-hover);
+  --color-danger-border: var(--app-danger-border);
+  --color-danger-detail: var(--app-danger-detail);
+  --color-positive: var(--app-positive);
+}
+
+@layer base {
+  :root {
+    --app-canvas: var(--color-white);
+    --app-surface: var(--color-white);
+    --app-surface-muted: var(--color-gray-100);
+    --app-fg: var(--color-gray-900);
+    --app-fg-muted: var(--color-gray-600);
+    --app-fg-subtle: var(--color-gray-400);
+    --app-border: var(--color-gray-200);
+    --app-accent: var(--color-blue-700);
+    --app-accent-fg: var(--color-blue-700);
+    --app-accent-surface: var(--color-blue-50);
+    --app-accent-surface-hover: var(--color-blue-100);
+    --app-accent-border: var(--color-blue-200);
+    --app-inverse: var(--color-gray-900);
+    --app-inverse-fg: var(--color-white);
+    --app-inverse-hover: var(--color-gray-700);
+    --app-danger: var(--color-red-600);
+    --app-danger-fg: var(--color-red-800);
+    --app-danger-surface: var(--color-red-50);
+    --app-danger-surface-hover: var(--color-red-100);
+    --app-danger-border: var(--color-red-200);
+    --app-danger-detail: var(--color-red-900);
+    --app-positive: var(--color-green-500);
+  }
+
+  .dark {
+    --app-canvas: var(--color-gray-950);
+    --app-surface: var(--color-gray-900);
+    --app-surface-muted: var(--color-gray-800);
+    --app-fg: var(--color-gray-100);
+    --app-fg-muted: var(--color-gray-400);
+    --app-fg-subtle: var(--color-gray-500);
+    --app-border: var(--color-gray-700);
+    --app-accent: var(--color-blue-400);
+    --app-accent-fg: var(--color-blue-200);
+    --app-accent-surface: var(--color-blue-950);
+    --app-accent-surface-hover: var(--color-blue-900);
+    --app-accent-border: var(--color-blue-800);
+    --app-inverse: var(--color-gray-100);
+    --app-inverse-fg: var(--color-gray-900);
+    --app-inverse-hover: var(--color-gray-300);
+    --app-danger: var(--color-red-500);
+    --app-danger-fg: var(--color-red-200);
+    --app-danger-surface: color-mix(in oklab, var(--color-red-950) 70%, var(--color-gray-900));
+    --app-danger-surface-hover: var(--color-red-950);
+    --app-danger-border: var(--color-red-900);
+    --app-danger-detail: var(--color-red-300);
+    --app-positive: var(--color-green-400);
+  }
+
+  body {
+    @apply bg-canvas text-fg;
+  }
+}
+
+/*
+ * The library components ship with their own self contained (light) styles, which must not be changed
+ * there since theming is application specific: they are simply re-colored here with the same tokens.
+ * These rules are intentionally left outside of any @layer (unlayered styles win over layered ones) and
+ * repeat the class so that they are more specific than the emulated encapsulation ones of the component.
+ */
+lib-error-view .error-view.error-view {
+  border-color: var(--color-danger-border);
+  background: var(--color-danger-surface);
+  color: var(--color-danger-fg);
+}
+
+lib-error-view .error-view-icon.error-view-icon {
+  background: var(--color-danger);
+  color: var(--color-inverse-fg);
+}
+
+lib-error-view .error-view-action.error-view-action {
+  border-color: var(--color-danger-border);
+}
+
+lib-error-view .error-view-action.error-view-action:hover:not(:disabled) {
+  background: var(--color-danger-surface-hover);
+}
+
+lib-error-view .error-view-details.error-view-details {
+  color: var(--color-danger-detail);
+}
