@@ -24,3 +24,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `ReloadService` and `ReloadableResource`: coordinated reloading of resources.
 - Theming: `DarkModeService` and the `DarkModeButton` component.
 - Documentation of all services and components in the `README.md`.
+
+### Changed
+
+- CI: the pipeline now uses the `npm-publish` [component](https://gitlab.com/aeontronix/oss/aeon-gitlab-pipeline-components)
+  instead of the `node-lib` template. Branches are built and tested, a manual job on the default branch
+  tags the commit with the version of `projects/lib/package.json`, and the pipeline of that tag publishes
+  `dist/lib` to the npm registry of the project.
+- The `build`, `test`, `start` and `watch` scripts name the project they apply to, as `ng build` / `ng test`
+  cannot pick one in this multi project workspace.
